@@ -22,3 +22,14 @@ Day - 2 :
 [spiral matrix ii](https://leetcode.com/problems/spiral-matrix-ii)
 
 [Maximum Gap](https://leetcode.com/problems/maximum-gap)
+
+Day 3 :
+
+[Missing Positive](https://leetcode.com/problems/first-missing-positive/?envType=list&envId=oal4feim)
+
+[Single Number](https://leetcode.com/problems/single-number/?envType=list&envId=oal4feim)
+
+[Disappered Numbers](https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/?envType=list&envId=oal4feim)
+
+[Diagonally Traverse](https://leetcode.com/problems/diagonal-traverse/?envType=list&envId=oal4feim)
+
