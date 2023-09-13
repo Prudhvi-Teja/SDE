@@ -31,3 +31,26 @@ public class PhoneNumberConverter {
     }
 }
 
+
+
+
+
+
+
+
+
+ // Replace this with the phone number you want to format
+        String phoneNumberStr = "9876543210";
+
+        // Check if the phone number has 10 digits
+        if (phoneNumberStr.length() == 10) {
+            // Format the phone number as (XXX)XXX-XXXX
+            String formattedNumber = "(" + phoneNumberStr.substring(0, 3) + ")" +
+                                     phoneNumberStr.substring(3, 6) + "-" +
+                                     phoneNumberStr.substring(6);
+            
+            System.out.println("Formatted Number: " + formattedNumber);
+        } else {
+            System.err.println("Invalid phone number: " + phoneNumberStr);
+        }
+    }
