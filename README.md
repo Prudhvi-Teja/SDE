@@ -102,3 +102,64 @@ Maintenance and Support Documentation: Guidelines and procedures for ongoing mai
 Business Documentation: Documents related to business processes, such as workflows and business rules, which the software supports or automates.
 
 
+
+
+?
+
+
+
+
+
+
+
+
+
+
+import org.springframework.core.io.buffer.DataBuffer;
+import org.springframework.core.io.buffer.DataBufferFactory;
+import org.springframework.core.io.buffer.DefaultDataBufferFactory;
+import reactor.core.publisher.Flux;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+
+public class FileService {
+
+    private final DataBufferFactory dataBufferFactory = new DefaultDataBufferFactory();
+
+    public Flux<DataBuffer> readFileContent(String filePath) {
+        return Flux.using(
+            () -> Files.newInputStream(Path.of(filePath), StandardOpenOption.READ),
+            inputStream -> {
+                byte[] buffer = new byte[1024]; // Read data in 1KB chunks
+                int bytesRead;
+                return Flux.generate(sink -> {
+                    try {
+                        bytesRead = inputStream.read(buffer);
+                        if (bytesRead == -1) {
+                            sink.complete();
+                        } else {
+                            DataBuffer dataBuffer = dataBufferFactory.wrap(buffer, 0, bytesRead);
+                            sink.next(dataBuffer);
+                        }
+                    } catch (IOException e) {
+                        sink.error(e);
+                    }
+                });
+            },
+            inputStream -> {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    // Handle the error or log it as needed
+                }
+            }
+        );
+    }
+}
+
+
+
+
